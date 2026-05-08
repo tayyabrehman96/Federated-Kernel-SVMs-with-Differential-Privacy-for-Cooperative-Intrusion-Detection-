@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+title: Federated Kernel SVMs with Differential Privacy for Cooperative Intrusion Detection in Smart Meter Networks
+message: >-
+  If you use this repository, please cite the MDPI Sensors article once it is
+  published (DOI to be added to README/CITATION). Until then, you may cite this software via the repository URL.
+type: software
+authors:
+  - family-names: Khan
+    given-names: Farrukh Aslam
+    email: fakhan@ksu.edu.sa
+    affiliation: Center of Excellence in Information Assurance, King Saud University, Saudi Arabia
+  - family-names: Rehman
+    given-names: Tayyab
+    email: tayyab.rehman@graduate.univaq.it
+    affiliation: University of L'Aquila, Italy
+  - family-names: Tariq
+    given-names: Noshina
+    email: noshina.tariq@isb.nu.edu.pk
+    affiliation: National University of Computer and Emerging Sciences, Pakistan
+  - family-names: Almuhtadi
+    given-names: Jalal
+    email: jalal@ksu.edu.sa
+    affiliation: King Saud University, Saudi Arabia
+repository-code: >-
+  https://github.com/tayyabrehman96/Federated-Kernel-SVMs-with-Differential-Privacy-for-Cooperative-Intrusion-Detection-
+abstract: >-
+  Materials for cooperative intrusion detection with federated kernel SVMs,
+  differential privacy, and edge–fog evaluation on CICIDS2017, CICIoT2023, and Edge-IIoT.
+keywords:
+  - federated learning
+  - intrusion detection
+  - differential privacy
+  - smart grid
+  - support vector machines
+date-released: '2026-05-08'
+version: 0.1.0

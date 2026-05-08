@@ -1,0 +1,36 @@
+## Enhanced Synthetic Results Tables
+
+### F1-optimal operating point
+| Class | Precision | Recall | F1 | Support |
+|---|---:|---:|---:|---:|
+| Benign | 0.0000 | 0.0000 | 0.0000 | 160 |
+| Attack | 0.2000 | 1.0000 | 0.3333 | 40 |
+
+Accuracy: 0.2000
+
+### Accuracy-optimal operating point
+| Class | Precision | Recall | F1 | Support |
+|---|---:|---:|---:|---:|
+| Benign | 0.8040 | 1.0000 | 0.8914 | 160 |
+| Attack | 1.0000 | 0.0250 | 0.0488 | 40 |
+
+Accuracy: 0.8050
+
+### Recall-targeted operating point (target=0.85)
+| Class | Precision | Recall | F1 | Support |
+|---|---:|---:|---:|---:|
+| Benign | 0.0000 | 0.0000 | 0.0000 | 160 |
+| Attack | 0.2000 | 1.0000 | 0.3333 | 40 |
+
+Accuracy: 0.2000
+
+### LightGBM 5-fold CV summary (OOF)
+```
+thresholds={'acc_opt': 0.78, 'f1_opt': 0.17300000000000001, 'rec_target': 0.0}
+metrics_acc_opt={'acc': 0.798, 'prec': 0.5, 'rec': 0.0049504950495049506, 'f1': 0.00980392156862745}
+metrics_f1_opt={'acc': 0.257, 'prec': 0.20756756756756756, 'rec': 0.9504950495049505, 'f1': 0.34072759538598046}
+metrics_rec_target={'acc': 0.202, 'prec': 0.202, 'rec': 1.0, 'f1': 0.3361064891846922}
+roc_auc=0.5179781136008338
+pr_auc=0.2084407969602074
+cv_splits=5
+```

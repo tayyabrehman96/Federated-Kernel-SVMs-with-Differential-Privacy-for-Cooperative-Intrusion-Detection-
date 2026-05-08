@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# LaTeX
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+
+# Unrelated / third-party PDFs (do not ship other journals’ submissions)
+MDPI_Sustainability*_Submission*.pdf
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large / local data — recommended for GitHub (see REPOSITORY.md).
+# Remove the leading '#' only if you intentionally ship samples or use Git LFS.
+experiments/CICIDS2017/*.csv
+experiments/CICIDS2023/*.csv
+experiments/edge_iiot/data/*.csv
+experiments/enhanced_synthetic_cyber_attack/*.csv
+
+# Generated images (optional: commit for convenience)
+# figures/*.png

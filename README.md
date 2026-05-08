@@ -46,11 +46,56 @@ Large-scale **Advanced Metering Infrastructure (AMI)** expands the attack surfac
 
 ## 3. Methodology
 
-**Edge** clients train **kernel SVM** surrogates and transmit **DP-perturbed** updates only. **Fog** uses **diversity-aware Federated Averaging (DA-FedAvg)**, recovering **size-weighted FedAvg** when \(\lambda{=}0\). A **cloud/fog ensemble** operates on **scores**, not raw packets. Algorithmic detail, protocols, and hyper-parameters are given in the MDPI manuscript.
+The following summarises the **edge–fog–cloud** pipeline described in the MDPI *Sensors* manuscript: how data are represented, how clients learn and share information under **differential privacy**, how the **fog** aggregates under **non-IID** data, and how a **global ensemble** and **SHAP** complete the decision stack. Symbols and hyper-parameters are defined fully in the paper; this section orients implementers and readers of the code.
+
+### 3.1 System architecture
+
+The framework follows a **three-tier** deployment aligned with smart-meter networks:
+
+1. **Edge (smart meters / field gateways):** Each client holds a **private** tabular flow dataset (e.g. CICFlowMeter-style **numerical features**; **84** dimensions on CICIDS2017, with compatible feature pipelines on IoT and IIoT benchmarks). **Raw flow records do not leave the edge.** Only compact model updates (or scores derived from local models) are eligible for transmission upward.
+2. **Fog (regional aggregator):** Collects **privacy-preserving** updates from many edge clients, runs **federated aggregation**, and redistributes a **global** model (or sufficient statistics). This tier is responsible for **heterogeneity-aware** weighting (DA-FedAvg) and can act as an intermediary for **score vectors** used at the ensemble tier.
+3. **Cloud / ensemble tier:** Hosts a **stacked ensemble** of diverse classifiers that consume **decision scores** and meta-features—not raw packets—so uplink remains orders of magnitude smaller than centralising full feature matrices or PCAPs.
+
+The schematic **Figure A** (`pm.png`) illustrates DP updates from meters to a regional aggregator using **DA-FedAvg**, then **aggregated edge scores** feeding a **stacked ensemble** for multi-family threat discrimination.
+
+### 3.2 Data representation and preprocessing
+
+Public benchmarks are used as **standardised tabular IDS corpora**: each record is a **labelled flow** with statistical and protocol-derived attributes. **Preprocessing** (ingestion, duplicate removal, stratified splits, scaling where applicable) is performed **inside** the training scripts or notebooks, consistent with the experimental protocol in the article. The goal is to align **train/validation/test** partitions and **feature dimensionality** across centralised, federated, and ablation runs so that reported gaps (e.g. non-IID) reflect the **federation protocol**, not ad-hoc data leakage.
+
+### 3.3 Local learning at the edge
+
+At each edge client, intrusion detection is implemented with **margin-based** models dominated by **kernel SVM** (RBF) principles in the paper: they offer strong performance on **medium-dimensional** numeric flows, **convex** local optimisation (more stable than deep models under class skew), and **interpretable** real-valued **scores** \(s(\mathbf{x})\) that can be composed downstream.
+
+**Differential privacy (DP):** Before an update is transmitted, **Gaussian noise** is applied according to an \((\varepsilon, \delta)\) **Gaussian mechanism** with sensitivity derived from the **\(\ell_2\)** norm of the releasable vector (e.g. SVM weights), as detailed in the manuscript. **Multiple rounds** compose privacy budgets; the article reports **round-level** and **total** budget accounting. DP protects against inference from **observing uploads**, not against a compromised edge device.
+
+### 3.4 Federation, DA-FedAvg, and non-IID data
+
+**Standard FedAvg** aggregates client models with weights proportional to **local sample counts**. **Diversity-aware Federated Averaging (DA-FedAvg)** reweights clients using a **diversity coefficient** \(\lambda\) based on **local label entropy** (clients with more **mixed** class mass receive higher weight after renormalisation). Setting \(\lambda{=}0\) recovers **size-weighted FedAvg**. This mitigates **aggregation bias** when Dirichlet concentration is low and some clients see nearly single-class shards.
+
+**Non-IID simulation:** Client partitions are drawn with a **Dirichlet** allocation over class indices (concentration \(\alpha\): smaller \(\alpha\) implies **stronger** skew). The repository’s driver `generate_revision_results.py` uses the same **per-class Dirichlet** construction with **federated logistic regression** (84-D binary) as a **transparent, reproducible proxy** for the edge learner when generating `metrics.json`, **FedAvg / FedProx / median / multi-Krum** options, and label-flip **Byzantine** fractions—mirroring the **non-IID and robustness** narrative of the paper without shipping raw CIC CSVs.
+
+**FedProx:** A proximal term penalises deviation from the **global** iterate on each client, improving stability when local objectives are badly conditioned under skew.
+
+### 3.5 Cooperative detection and the stacked ensemble
+
+The **cooperative detection** design separates:
+
+- **Edge-side “local certainty”:** fast **margin/score** from the federated kernel SVM for **volume-oriented** or locally separable abuse; and  
+- **Fog-side “global correlation”:** inference over **cross-client score patterns** (e.g. correlated anomalies across meters) without recentralising raw flows.
+
+At the **ensemble tier**, several **heterogeneous** learners (e.g. boosting, random forests, extra trees) are **stacked** on **meta-inputs** derived from base-model **scores**, improving **multi-family** discrimination and calibration compared to any single base learner. **SHAP (SHapley Additive exPlanations)** is applied to explain **which flow features** drive alerts, supporting operator triage and audit.
+
+### 3.6 Communication footprint (conceptual)
+
+Compared with uploading **full feature tensors** or **raw PCAP** to a central IDS, transmitting **low-dimensional** model parameters (e.g. on the order of **tens to hundreds of floats per client per round** for linearised or kernelised surrogates in the paper’s configuration) yields a **large reduction in uplink**. Exact byte counts and round budgets appear in the article; the important design constraint is **no raw-flow centralisation** while keeping aggregation **practical** on AMI-class backhaul.
+
+### 3.7 Figures
 
 ![Three-tier architecture: edge SVM with DP, regional DA-FedAvg, cloud stacked ensemble](pm.png)
 
 ![End-to-end workflow: ingestion, preprocessing, partitioning, local training, DP aggregation, evaluation](Methodology_SM.jpg)
+
+**Figure B** (`Methodology_SM.jpg`) aligns with the **workflow** figure in the paper: ingestion → preprocessing → **Dirichlet** partitioning → **local training** → **DP aggregation (DA-FedAvg)** → **global ensemble & SHAP evaluation**.
 
 ---
 

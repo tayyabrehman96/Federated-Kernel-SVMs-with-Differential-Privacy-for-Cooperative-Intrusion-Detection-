@@ -8,7 +8,7 @@ venv/
 # Jupyter
 .ipynb_checkpoints/
 
-# LaTeX
+# LaTeX build
 *.aux
 *.bbl
 *.blg
@@ -19,19 +19,27 @@ venv/
 *.fdb_latexmk
 *.fls
 
-# Unrelated / third-party PDFs (do not ship other journals’ submissions)
+# Figures & documents (keep locally; do not version binary assets)
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.pdf
+
+# Trained tree models (regenerate with experiment scripts)
+experiments/CICIDS2023_code/xgb_cicids2023.json
+experiments/enhanced_synthetic_cyber_attack/enh_synth_xgb.json
+
+# Third-party / stray submissions
 MDPI_Sustainability*_Submission*.pdf
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Large / local data — recommended for GitHub (see REPOSITORY.md).
-# Remove the leading '#' only if you intentionally ship samples or use Git LFS.
+# Raw & derived datasets
 experiments/CICIDS2017/*.csv
 experiments/CICIDS2023/*.csv
 experiments/edge_iiot/data/*.csv
 experiments/enhanced_synthetic_cyber_attack/*.csv
-
-# Generated images (optional: commit for convenience)
-# figures/*.png

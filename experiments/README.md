@@ -20,12 +20,11 @@ set FED_NO_TORCH=1
 python run_federated_revision_tables.py
 ```
 
-Outputs:
+Outputs (written locally; raster files are **not** committed to Git):
 
-- `../results/metrics.json`: all table statistics
-- `../results/table_noniid_alpha_rows.tex`: LaTeX rows for the α sweep
-- `../figures/fig_noniid_alpha_sweep.png`
-- `../figures/fig_byzantine_robustness.png`
+- `../results/metrics.json` — table statistics
+- `../results/table_noniid_alpha_rows.tex`, `../results/table_dafedavg_rows.tex` — LaTeX row helpers
+- `../figures/fig_noniid_alpha_sweep.png`, `../figures/fig_byzantine_robustness.png` — regenerate on your machine
 
 ## PCAP-flow XGBoost (CICIoT2023 / CIC-IoT-2024 CSV tree)
 

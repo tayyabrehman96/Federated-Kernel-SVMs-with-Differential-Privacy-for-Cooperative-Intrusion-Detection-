@@ -19,9 +19,11 @@ venv/
 *.fdb_latexmk
 *.fls
 
-# Figures & documents (keep locally; do not version binary assets)
+# Figures & documents (most binaries local-only; see exceptions below)
 *.png
+!pm.png
 *.jpg
+!Methodology_SM.jpg
 *.jpeg
 *.gif
 *.webp

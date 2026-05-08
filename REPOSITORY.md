@@ -5,6 +5,7 @@ This repository is intentionally **small and text-centric**: manuscript sources,
 ## Tracked
 
 - `template.tex`, `ref.bib`, `response_to_reviewers.md`
+- `pm.png`, `Methodology_SM.jpg` (manuscript/reference diagrams for README and LaTeX)
 - `results/*` as present (JSON / TeX helpers)
 - `experiments/**/*.py`, `experiments/**/*.ipynb`, `experiments/requirements.txt`
 - `experiments/**/*.md` (reports / READMEs)
@@ -14,7 +15,7 @@ This repository is intentionally **small and text-centric**: manuscript sources,
 ## Not tracked (local or release only)
 
 - **Benchmark CSVs** under `experiments/CICIDS2017/`, `experiments/CICIDS2023/`, `experiments/edge_iiot/data/`, `experiments/enhanced_synthetic_cyber_attack/*.csv`
-- **Figures**: `*.png`, `*.jpg`, … (regenerate from scripts or export from LaTeX build)
+- **Figures**: all other `*.png` / `*.jpg` / … (regenerate from scripts or export from LaTeX); only `pm.png` and `Methodology_SM.jpg` are versioned by exception.
 - **PDFs** (camera-ready, other submissions)
 - **Saved XGBoost boosters** `xgb_cicids2023.json`, `enh_synth_xgb.json` (retrain to reproduce)
 - MDPI **`Definitions/`** class bundle (obtain from the publisher)

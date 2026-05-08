@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 
 import xgboost as xgb
 
-# Repo-root convention: see experiments/dataset_paths.py and DATASETS.md (CICIoT2023 vs CIC-IoT-2024 path).
+# Repo-root convention: see experiments/dataset_paths.py and root README (dataset layout + CIC_FLOW_BENCHMARK_DIR).
 try:
     from dataset_paths import CIC_FLOW_BENCHMARK_DIR
 except ImportError:

@@ -8,7 +8,7 @@ Place preprocessed flow/feature CSV files (or the structure your training script
 
 `data/`
 
-(`data/.gitkeep` keeps the folder in Git; large files are usually excluded—see root `DATASETS.md`.)
+(`data/.gitkeep` keeps the folder in Git; large files stay local—see root `README.md` § Benchmarks.)
 
 ## Next step for full reproduction
 

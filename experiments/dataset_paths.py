@@ -1,5 +1,5 @@
 """
-Canonical paths for the three MDPI paper benchmarks (see ../DATASETS.md).
+Canonical paths for the three MDPI paper benchmarks (see root README.md).
 
 Import this from experiment scripts so clones share one layout.
 """

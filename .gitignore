@@ -1,3 +1,9 @@
+# Manuscript (local only — not distributed via this repo)
+*.tex
+ref.bib
+template.tex
+response_to_reviewers.md
+
 # Python
 __pycache__/
 *.py[cod]

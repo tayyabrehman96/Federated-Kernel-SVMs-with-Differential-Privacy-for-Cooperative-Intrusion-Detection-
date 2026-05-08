@@ -1,27 +1,22 @@
 # Version control policy
 
-This repository is intentionally **small and text-centric**: manuscript sources, Python/notebooks, Markdown notes, and **small** numeric artefacts (e.g. `results/metrics.json`, `.txt` thresholds, `.tex` row snippets).
+The repository is **code-first**: Python, notebooks, Markdown, two reference figures (`pm.png`, `Methodology_SM.jpg`), and **`results/metrics.json`**.
 
 ## Tracked
 
-- `template.tex`, `ref.bib`, `response_to_reviewers.md`
-- `pm.png`, `Methodology_SM.jpg` (manuscript/reference diagrams for README and LaTeX)
-- `results/*` as present (JSON / TeX helpers)
-- `experiments/**/*.py`, `experiments/**/*.ipynb`, `experiments/requirements.txt`
-- `experiments/**/*.md` (reports / READMEs)
-- `experiments/edge_iiot/data/.gitkeep`
-- Root docs: `README.md`, `DATASETS.md`, `AUTHORS.md`, `CITATION.cff`, `.gitignore`
+- `README.md`, `DATASETS.md`, `REPOSITORY.md`, `AUTHORS.md`, `CITATION.cff`, `.gitignore`
+- `pm.png`, `Methodology_SM.jpg`
+- `results/metrics.json` only (no LaTeX table fragments)
+- `experiments/**/*.py`, `experiments/**/*.ipynb`, `experiments/requirements.txt`, `experiments/**/*.md`, `experiments/edge_iiot/data/.gitkeep`
 
-## Not tracked (local or release only)
+## Not tracked (local, Zenodo, or release)
 
-- **Benchmark CSVs** under `experiments/CICIDS2017/`, `experiments/CICIDS2023/`, `experiments/edge_iiot/data/`, `experiments/enhanced_synthetic_cyber_attack/*.csv`
-- **Figures**: all other `*.png` / `*.jpg` / … (regenerate from scripts or export from LaTeX); only `pm.png` and `Methodology_SM.jpg` are versioned by exception.
-- **PDFs** (camera-ready, other submissions)
-- **Saved XGBoost boosters** `xgb_cicids2023.json`, `enh_synth_xgb.json` (retrain to reproduce)
-- MDPI **`Definitions/`** class bundle (obtain from the publisher)
+- **Manuscript:** `*.tex`, `ref.bib`, reviewer letters — keep privately or on the journal system
+- **Raw / derived CSV** under dataset folders
+- **Raster figures** except the two whitelisted images; **PDF** camera-ready
+- **Saved XGBoost / other checkpoints** (`xgb_cicids2023.json`, `enh_synth_xgb.json`, etc.)
+- **Preprocessing dumps** — preprocessing runs **inside** trainers/notebooks; do not commit intermediate parquet/pickle trees unless via Zenodo with a DOI
 
-For bulky reproducibility bundles, use **GitHub Releases** or **Zenodo** and link the DOI or URL from `README.md` / `DATASETS.md`.
+## Zenodo & model hosting
 
-## First clone
-
-After cloning, create local folders for data and figures as described in `DATASETS.md` and in `template.tex` (`figures/`, etc.). Nothing in Git replaces downloading licensed datasets.
+Freeze optional bundles (split hashes, configs, permitted checkpoints) on **Zenodo** and add the DOI to `README.md`. Optional **Hugging Face** links for distilled models can be added the same way.

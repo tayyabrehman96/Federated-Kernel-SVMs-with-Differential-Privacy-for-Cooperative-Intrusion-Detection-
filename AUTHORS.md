@@ -1,6 +1,6 @@
 # Authors and correspondence
 
-Author list and affiliations match the MDPI LaTeX source (`template.tex`) for *Federated Kernel SVMs with Differential Privacy for Cooperative Intrusion Detection in Smart Meter Networks*.
+Author list and affiliations for *Federated Kernel SVMs with Differential Privacy for Cooperative Intrusion Detection in Smart Meter Networks* (MDPI *Sensors*).
 
 | Author | Affiliation | Contact |
 |--------|-------------|---------|

@@ -1,11 +1,7 @@
-# CIC-IoT benchmark (manuscript: CICIoT2023)
+# CIC-IoT (paper: CICIoT2023)
 
-- **Official data:** [UNB CIC — IoT Dataset 2023](https://www.unb.ca/cic/datasets/iotdataset-2023.html)
-- **Paper naming:** `template.tex` uses *CICIoT2023*.
-- **This clone:** PCAP-flow CSVs live in `experiments/CICIDS2023/`; XGBoost + reports in `experiments/CICIDS2023_code/`.
-- **CIC-IoT-2024:** set environment variable `CIC_FLOW_BENCHMARK_DIR` to your CSV root (see root `DATASETS.md`).
-
-Train the included baseline:
+- **Official data:** [UNB — IoT Dataset 2023](https://www.unb.ca/cic/datasets/iotdataset-2023.html)
+- This codebase names the default flow-CSV folder `CICIDS2023/` for the PCAP-flow XGBoost path; override with `CIC_FLOW_BENCHMARK_DIR` if your extract differs.
 
 ```bash
 cd ../CICIDS2023_code
